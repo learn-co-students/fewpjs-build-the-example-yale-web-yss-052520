@@ -4,6 +4,25 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+let changeHearts = function() {
+  const heart = event.target
+  if (heart.classList.innerText == FULL_HEART) {
+    mimicServerCall().then(() => {
+      heart.className = ""
+      heart.innerText = EMPTY_HEART
+    })
+  }
+  else {
+    mimicServerCall().then(() => {
+      heart.className = "activated-heart"
+      heart.innerText = FULL_HEART
+    })
+  }
+}
+allHearts = document.getElementsByClassName("like")
+for (const heart of allHearts) {
+  heart.addEventListener("click", changeHearts)
+}
 
 
 
