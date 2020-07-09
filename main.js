@@ -3,6 +3,9 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+let modalDiv = document.querySelector("#modal")
+modalDiv.className = "hidden"
+
 
 
 
