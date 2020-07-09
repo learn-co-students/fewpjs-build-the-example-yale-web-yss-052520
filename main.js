@@ -4,6 +4,27 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+let changeHeart = function () {
+  // console.log(event.target)
+  const heartDiv = event.target
+  if (heartDiv.classList.contains("activated-heart")) {
+    mimicServerCall().then(() => {
+      heartDiv.classList.remove("activated-heart")
+      heartDiv.innerHTML = EMPTY_HEART
+    })
+  }
+  else {
+    mimicServerCall().then(() => {
+      heartDiv.classList.add("activated-heart")
+      heartDiv.innerHTML = FULL_HEART
+    })
+  }
+}
+
+allHearts = document.querySelectorAll('span.like-glyph')
+for (const heart of allHearts) {
+  heart.addEventListener("click", changeHeart)
+}
 
 
 
