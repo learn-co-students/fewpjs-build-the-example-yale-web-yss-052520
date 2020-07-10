@@ -3,8 +3,37 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+let heartStates = {
+  "♡": "♥",
+  "♥": "♡"
+};
 
+let colorStates = {
+  "red" : "",
+  "": "red"
+};
 
+let findHearts = document.querySelectorAll(".like");
+
+function likeCallback(e) {
+  let heart = e.target;
+  mimicServerCall("bogusUrl")
+   //OR: mimicServerCall("bogusUrl", {forceFailure: true})
+    .then(function(serverMessage){
+       heart.innerText = heartStates[heart.innerText];
+       heart.style.color = colorStates[heart.style.color];
+    })
+    .catch(function(error) {
+      // Basic
+      // alert("Something went wrong!");
+      // or....
+      document.getElementById("modal").className = "";
+    });
+}
+
+for (let glyph of findHearts) {
+  glyph.addEventListener("click", likeCallback);
+}
 
 
 //------------------------------------------------------------------------------
