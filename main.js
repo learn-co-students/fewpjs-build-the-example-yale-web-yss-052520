@@ -6,6 +6,24 @@ const FULL_HEART = '♥'
 let modalDiv = document.querySelector("#modal")
 modalDiv.className = "hidden"
 
+let heartGlyph = document.querySelector("span.like-glyph")
+
+heartGlyph.addEventListener("click", () => {
+  mimicServerCall(url="http://mimicServer.example.com", config={})
+  .then( () => {
+    // debugger
+  if (heartGlyph.innerHTML == EMPTY_HEART) {
+    heartGlyph.innerHTML = FULL_HEART
+    heartGlyph.className = "activated-heart"}
+  else
+    heartGlyph.innerHTML = EMPTY_HEART
+  })
+  .catch( error => {
+    modalDiv.className = ""
+    modalDiv.innerText = error
+    setTimeout( () => {modalDiv.className = "hidden"}, 5000)
+  })
+})
 
 
 
