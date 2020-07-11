@@ -4,7 +4,38 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
-
+document.addEventListener('DOMContentLoaded', () => {
+  const errorDiv = document.getElementById('modal')
+  const errorPTag = document.getElementById('modal-message')
+  errorDiv.className = 'hidden'
+  const posts = document.querySelectorAll('article.media-post')
+  
+  function hideError() {
+    errorDiv.className = 'hidden'
+  }
+  
+  posts.forEach(post => {
+    const likeBtn = post.querySelector('span')
+    const heart = likeBtn.innerText
+    likeBtn.addEventListener('click', () => {
+      mimicServerCall()
+      .then(() => {
+        if (heart == EMPTY_HEART) {
+          likeBtn.innerText = FULL_HEART
+          likeBtn.className = 'activated-heart'
+        } else {
+          likeBtn.innerText = EMPTY_HEART
+          likeBtn.className = 'like-glyph'
+        }
+      })
+      .catch(err => {
+        errorPTag.innerText = err
+        errorDiv.className = ''
+        setTimeout(hideError(), 5000)
+      })
+    })
+  })
+})
 
 
 //------------------------------------------------------------------------------
