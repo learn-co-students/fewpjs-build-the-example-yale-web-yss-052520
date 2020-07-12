@@ -27,7 +27,9 @@ function like(event) {
     heart.style.color = heartColor[heart.style.color]
   }) 
   .catch(function(error) {
-    document.getElementById("modal").className = ""
+    errorModal = document.getElementById("modal")
+    errorModal.className = ""
+    errorModal.children[0].innerText = 'Server did not respond :('
   })
 }
 
