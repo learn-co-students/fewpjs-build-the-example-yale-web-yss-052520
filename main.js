@@ -3,6 +3,35 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+let hearts = document.querySelectorAll(".like")
+
+for (heart of hearts) {
+  heart.addEventListener("click", like)
+}
+
+heartSign = {
+  '♡': '♥',
+  '♥': '♡'
+}
+
+heartColor = {
+  '': 'red',
+  'red': ''
+}
+
+function like(event) {
+  let heart = event.target
+  mimicServerCall("fakeURL")
+  .then(function(serverMessage){
+    heart.innerText = heartSign[heart.innerText]
+    heart.style.color = heartColor[heart.style.color]
+  }) 
+  .catch(function(error) {
+    document.getElementById("modal").className = ""
+  })
+}
+
+
 
 
 
