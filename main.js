@@ -2,10 +2,37 @@
 const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
-// Your JavaScript code goes here!
+// defining variables
+const errorPop = document.querySelector("div#modal")
+const hearts = document.querySelectorAll(".like-glyph")
 
+// warning
+errorPop.classList.add("hidden")
 
-
+// likes
+document.addEventListener('DOMContentLoaded', () => {
+  const hearts = document.querySelectorAll("span.like-glyph")
+  hearts.forEach(like =>{
+    like.addEventListener("click", () => {
+      mimicServerCall()
+      .then(function(response) {
+        if (like.innerText == FULL_HEART){
+          like.innerText = EMPTY_HEART
+          like.classList.remove("activated-heart")
+        }
+        else {
+          like.innerText = FULL_HEART
+          like.classList.add("activated-heart")
+        }
+      })
+      .catch(error =>{
+        errorPop.classList.remove('hidden')
+        errorPop.children[1].innerText = error
+        setTimeout(() => errorPop.classList.add("hidden"), 5000)
+      }) 
+    })
+  })
+})
 
 //------------------------------------------------------------------------------
 // Ignore after this point. Used only for demo purposes
