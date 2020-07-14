@@ -4,6 +4,50 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+function qs(descriptor) {
+  return document.querySelector(descriptor)
+}
+
+function qsa(descriptor) {
+  return document.querySelectorAll(descriptor)
+}
+
+function ce(element) {
+  return document.createElement(element)
+}
+
+function toggle_heart(liker) {
+  if (liker.innerText == EMPTY_HEART) {
+    liker.innerText = FULL_HEART
+  } else {
+    liker.innerText = EMPTY_HEART
+  }
+}
+
+const errorbanner = qs('#modal')
+const likers = qsa('.like .like-glyph')
+
+for (const liker of likers) {
+  liker.addEventListener('click', () => {
+    mimicServerCall()
+    .then(() => {
+      liker.classList.toggle("activated-heart")
+      toggle_heart(liker)
+    })
+    .catch(error => {
+      errorbanner.classList.remove("hidden")
+      errorbanner.querySelector("#modal-message").innerText = error
+      setTimeout(() => {
+        errorbanner.classList.add("hidden")
+      }, 5000)
+    })
+  })
+}
+
+
+  
+
+  
 
 
 
