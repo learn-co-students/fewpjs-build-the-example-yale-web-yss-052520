@@ -8,7 +8,8 @@ let hearts = document.querySelectorAll('span.like-glyph')
 hearts.forEach(heart => {
     heart.addEventListener("click", () => {
         if (heart.innerHTML === FULL_HEART) {
-            // heart.innerHTML = EMPTY_HEART
+            heart.innerHTML = EMPTY_HEART
+            heart.classList.remove("activated-heart")
         } else if (heart.innerHTML === EMPTY_HEART) {
             mimicServerCall().then( () => {
               heart.innerHTML = FULL_HEART
